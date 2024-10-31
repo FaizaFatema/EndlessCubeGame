@@ -9,7 +9,7 @@ public class BuildingSpawner : MonoBehaviour
     public Transform player;
 
     public float spawnDistance = 15f;
-    public float spawnRange = 3f;
+    public float spawnRangeX = 3f;
     public float spawnHeight = 1f;
 
     private Vector3 lastSpawnPosition;
@@ -32,7 +32,7 @@ public class BuildingSpawner : MonoBehaviour
     {
         GameObject plateform = buildingPrefabs[Random.Range(0,buildingPrefabs.Length)];
         Vector3 prefabSize=plateform.GetComponent<Renderer>().bounds.size;
-        Vector3 spwanPosition = new Vector3(transform.position.x,transform.position.y+spawnHeight,lastSpawnPosition.z+prefabSize.z);
+        Vector3 spwanPosition = new Vector3(transform.position.x+Random.Range(-spawnRangeX, spawnRangeX), spawnHeight, lastSpawnPosition.z + prefabSize.z);
         Instantiate(plateform,spwanPosition,Quaternion.identity);
         lastSpawnPosition=spwanPosition;
     }

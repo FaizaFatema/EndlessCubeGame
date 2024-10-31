@@ -1,29 +1,29 @@
-//using UnityEngine;
-//using TMPro;
+using UnityEngine;
+using TMPro;
 
-//public class Score : MonoBehaviour
-//{
-//  //  GameController gameController;
+public class Score : MonoBehaviour
+{
+      GameController gameController;
 
-//    public TextMeshProUGUI scoreText;
-    
-//    public float score = 0f;
+    public TextMeshProUGUI scoreText;
 
-//    private void Start()
-//    {
-//       // gameController = FindObjectOfType<GameController>();
-//    }
-//    private void FixedUpdate()
-//    {
+    public float score = 0f;
 
-//        if (!gameController.isGameOver)
-//        {
-//            score += Time.deltaTime; 
-//        }
-//        scoreText.text = ((int)score).ToString();
-//    }
-//    void PlayerOut()
-//    {
-//        gameController.GameOver();
-//    }
-//}
+    private void Start()
+    {
+         gameController = FindObjectOfType<GameController>();
+    }
+    private void FixedUpdate()
+    {
+
+        if (!gameController.isGameOver)
+        {
+            score += Time.deltaTime;
+        }
+        scoreText.text = ((int)score).ToString();
+    }
+    void PlayerOut()
+    {
+        gameController.GameOver();
+    }
+}
