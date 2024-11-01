@@ -7,7 +7,6 @@ public class GroundManager : MonoBehaviour
     public GameObject[] groundPrefabs;
     public Transform player;
     public float spawnDistance = 15f;
-    public float spawnRangeX = 3f;
     public float spawnHeight = 1f;
 
     private Vector3 lastSpawnPosition;
@@ -33,6 +32,7 @@ public class GroundManager : MonoBehaviour
 
         // Get the size of the selected prefab
         Vector3 prefabSize = plateForm.GetComponent<Renderer>().bounds.size;
+        Debug.Log($" ground prefab size z is {prefabSize.z}");
 
         // Calculate the spawn position based on the last position and the size of the last spawned platform
         Vector3 spawnPosition = new Vector3(
