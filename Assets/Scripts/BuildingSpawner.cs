@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BuildingSpawner : MonoBehaviour
@@ -9,7 +10,6 @@ public class BuildingSpawner : MonoBehaviour
     public Transform player;
 
     public float spawnDistance = 15f;
-    public float spawnRangeX = 3f;
     public float spawnHeight = 1f;
 
     private Vector3 lastSpawnPosition;
@@ -17,7 +17,7 @@ public class BuildingSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lastSpawnPosition=player.position;
+        lastSpawnPosition = player.position;
     }
 
     // Update is called once per frame
@@ -30,10 +30,15 @@ public class BuildingSpawner : MonoBehaviour
     }
     public void SpwanPlatform()
     {
-        GameObject plateform = buildingPrefabs[Random.Range(0,buildingPrefabs.Length)];
-        Vector3 prefabSize=plateform.GetComponent<Renderer>().bounds.size;
-        Vector3 spwanPosition = new Vector3(transform.position.x+Random.Range(-spawnRangeX, spawnRangeX), spawnHeight, lastSpawnPosition.z + prefabSize.z);
-        Instantiate(plateform,spwanPosition,Quaternion.identity);
-        lastSpawnPosition=spwanPosition;
+        Building building = buildingPrefabs[Random.Range(0, buildingPrefabs.Length)].GetComponent<Building>();
+        //Vector3 prefabSize= building.GetComponent<Renderer>().bounds.size;
+
+        Vector3 spwanPosition = new Vector3(transform.position.x, transform.position.y + spawnHeight, lastSpawnPosition.z + 0);
+        
+        Building spawnedBuilding = Instantiate(building, spwanPosition, Quaternion.identity).GetComponent<Building>();
+        spawnedBuilding.transform.position = new Vector3(spawnedBuilding.transform.position.x, spawnedBuilding.transform.position.y, lastSpawnPosition.z + spawnedBuilding.Length);
+        Debug.Log($"building size z is {spawnedBuilding.Length}");
+        spwanPosition.z = lastSpawnPosition.z + (spawnedBuilding.Length);
+        lastSpawnPosition = spwanPosition;
     }
 }
