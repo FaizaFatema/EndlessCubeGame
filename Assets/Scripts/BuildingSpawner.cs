@@ -31,7 +31,6 @@ public class BuildingSpawner : MonoBehaviour
     public void SpwanPlatform()
     {
         Building building = buildingPrefabs[Random.Range(0, buildingPrefabs.Length)].GetComponent<Building>();
-        //Vector3 prefabSize= building.GetComponent<Renderer>().bounds.size;
 
         Vector3 spwanPosition = new Vector3(transform.position.x, transform.position.y + spawnHeight, lastSpawnPosition.z + 0);
         
