@@ -32,6 +32,7 @@ public class BuildingSpawner : MonoBehaviour
     {
         Building building = buildingPrefabs[Random.Range(0, buildingPrefabs.Length)].GetComponent<Building>();
         //Vector3 prefabSize= building.GetComponent<Renderer>().bounds.size;
+        //another comment
 
         Vector3 spwanPosition = new Vector3(transform.position.x, transform.position.y + spawnHeight, lastSpawnPosition.z + 0);
         
