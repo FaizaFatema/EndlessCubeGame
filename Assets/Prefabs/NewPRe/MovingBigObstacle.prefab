@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5945509316025733834}
   - component: {fileID: 662408044441147104}
   - component: {fileID: 2200825911617330584}
-  - component: {fileID: 3869636000006646511}
+  - component: {fileID: 3291497915861281275}
   m_Layer: 0
   m_Name: MovingBigObstacle
   m_TagString: Obstacle
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3869636000006646511
+--- !u!114 &3291497915861281275
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,8 +115,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6230951089682756240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 208adca73c775e5489ed68ff3ae48300, type: 3}
+  m_Script: {fileID: 11500000, guid: e279c7e58082803448d088b1f91991c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  movementRange: 2
+  movementRange: 2.2
