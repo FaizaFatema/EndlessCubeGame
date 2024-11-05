@@ -36,7 +36,7 @@ public class BuildingSpawner : MonoBehaviour
         
         Building spawnedBuilding = Instantiate(building, spwanPosition, Quaternion.identity).GetComponent<Building>();
         spawnedBuilding.transform.position = new Vector3(spawnedBuilding.transform.position.x, spawnedBuilding.transform.position.y, lastSpawnPosition.z + spawnedBuilding.Length);
-        Debug.Log($"building size z is {spawnedBuilding.Length}");
+      //  Debug.Log($"building size z is {spawnedBuilding.Length}");
         spwanPosition.z = lastSpawnPosition.z + (spawnedBuilding.Length);
         lastSpawnPosition = spwanPosition;
     }
