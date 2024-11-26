@@ -678,7 +678,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7f395597a460d14e8c322ce86efd87c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPool: {fileID: 0}
   player: {fileID: 2141243810}
   spawnDistance: 5
   spawnHeight: 0
@@ -921,6 +920,7 @@ GameObject:
   m_Component:
   - component: {fileID: 718607655}
   - component: {fileID: 718607654}
+  - component: {fileID: 718607656}
   m_Layer: 0
   m_Name: BuildingSpwaner
   m_TagString: Untagged
@@ -940,11 +940,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a6fa7dbbed6c6f42991652a0b7fdfa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingPrefabs:
-  - {fileID: 5978875881636566563, guid: cdc18e24ad4774c49ab292d99226884f, type: 3}
   player: {fileID: 2141243810}
-  spawnDistance: 0
+  spawnDistance: 15
   spawnHeight: 0
+  buildingTag: Building
 --- !u!4 &718607655
 Transform:
   m_ObjectHideFlags: 0
@@ -960,6 +959,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &718607656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 718607653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 676e2de33484efa42879a3564a962500, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: Building
+    prefab: {fileID: 5978875881636566563, guid: cdc18e24ad4774c49ab292d99226884f, type: 3}
+    size: 10
 --- !u!1 &733820984
 GameObject:
   m_ObjectHideFlags: 0
