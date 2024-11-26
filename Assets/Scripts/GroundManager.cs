@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class GroundManager : MonoBehaviour
 {
-    public GameObject[] groundPrefabs;
+    public static GroundManager Instance{get;private set;}
+
+
     public Transform player;
+
     public float spawnDistance = 15f;
     public float spawnHeight = 1f;
 
+    public string groundTag = "Ground";
+
     private Vector3 lastSpawnPosition;
 
-    // Start is called before the first frame update
+    public void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        Instance = this;
+    }
     void Start()
     {
         lastSpawnPosition = player.position;
@@ -28,21 +40,23 @@ public class GroundManager : MonoBehaviour
     public void SpawnPlatform()
     {
         // Select a random ground prefab
-        GameObject plateForm = groundPrefabs[Random.Range(0, groundPrefabs.Length)];
-
-        // Get the size of the selected prefab
+        GameObject plateForm = ObjectPool.Instance.SpawnFromPool(groundTag,Vector3.zero,Quaternion.identity);
         Vector3 prefabSize = plateForm.GetComponent<Renderer>().bounds.size;
-        Debug.Log($" ground prefab size z is {prefabSize.z}");
-
-        // Calculate the spawn position based on the last position and the size of the last spawned platform
         Vector3 spawnPosition = new Vector3(
             transform.position.x,
             transform.position.y + spawnHeight,
             lastSpawnPosition.z + prefabSize.z // Use the z size of the prefab for proper placement
         );
+        plateForm.transform.position = spawnPosition;
+
+
+        // Get the size of the selected prefab
+        Debug.Log($" ground prefab size z is {prefabSize.z}");
+        // Calculate the spawn position based on the last position and the size of the last spawned platform
+
 
         // Instantiate the new platform
-        Instantiate(plateForm, spawnPosition, Quaternion.identity);
+     //   Instantiate(plateForm, spawnPosition, Quaternion.identity);
 
         // Update the last spawn position
         lastSpawnPosition = spawnPosition;
