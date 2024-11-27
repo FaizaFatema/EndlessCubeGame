@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance;
     public Rigidbody rigidbody;
 
     public float force = 100f;
@@ -11,6 +12,14 @@ public class Player : MonoBehaviour
 
     public float minX;
     public float maxX;
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        Instance = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +27,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+  public  void Update()
     {
         Vector3 pos= transform.position;
         pos.x = Mathf.Clamp(pos.x, minX, maxX);
