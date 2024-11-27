@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public GameObject gameOverPanel;
-
+    
     public bool isGameOver = false;
+   
     public void GameOver()
     {
         isGameOver = true;
@@ -17,8 +18,10 @@ public class GameController : MonoBehaviour
 
     public void Restart()
     {
+        isGameOver=false;
         gameOverPanel.SetActive(false);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 0f;
+       MainMenu.Instance.mainMenu.SetActive(true);
     }
     public void Quit()
     {
