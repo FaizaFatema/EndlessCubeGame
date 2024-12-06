@@ -12,21 +12,21 @@ public class SwipeDetection : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.touchCount == 1)
-        //{
-        //    Touch touch = Input.GetTouch(0);
+        if (Input.touchCount == 1)
+        {
+            Touch touch = Input.GetTouch(0);
 
-        //    if (touch.phase == TouchPhase.Began)
-        //    {
-        //        touchStartPosition = touch.position;
-        //    }
-        //    if (touch.phase == TouchPhase.Ended)
-        //    {
-        //        touchEndPosition = touch.position;
-        //        DetectSwipeDirection();
-        //    }
+            if (touch.phase == TouchPhase.Began)
+            {
+                touchStartPosition = touch.position;
+            }
+            if (touch.phase == TouchPhase.Ended)
+            {
+                touchEndPosition = touch.position;
+                DetectSwipeDirection();
+            }
 
-        //}
+        }
     }
     public void DetectSwipeDirection()
     {
