@@ -1,14 +1,16 @@
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwipeDetection : MonoBehaviour
+public class MobileInput : MonoBehaviour
 {
     private Vector2 touchStartPosition;
     private Vector2 touchEndPosition;
     private float minSwipeDistance = 5f;
 
-    public Player player;
+
+    Vector2 swipeDirection;
 
     private void Update()
     {
@@ -33,21 +35,21 @@ public class SwipeDetection : MonoBehaviour
         float swipeDistance = (touchEndPosition - touchStartPosition).magnitude;
         if (swipeDistance >= minSwipeDistance)
         {
-            Vector2 swipeDirection = touchEndPosition - touchStartPosition;
+             swipeDirection = touchEndPosition - touchStartPosition;
 
             // Determine swipe direction (up, down, left, right)
             if (Mathf.Abs(swipeDirection.x) > Mathf.Abs(swipeDirection.y)) // Horizontal swipe
             {
-                if (swipeDirection.x > 0)
-                {
-                    // Swipe right
-                    MovePlayerRight();
+                //if (swipeDirection.x > 0)
+                //{
+                //    // Swipe right
+                //    MovePlayerRight();
 
-                }
-                else
-                {
-                    MovePlayerLeft();
-                }
+                //}
+                //else
+                //{
+                //    MovePlayerLeft();
+                //}
             }
             else // Vertical swipe
             {
@@ -62,20 +64,14 @@ public class SwipeDetection : MonoBehaviour
                     Debug.Log("Swipe Down");
                 }
             }
+
         }
+        swipeDirection = Vector2.zero;
     }
-    public void MovePlayerRight()
+
+
+    public float HorizontalInput()
     {
-        if (player != null)
-        {
-            player.transform.position += new Vector3(player.speed * Time.deltaTime, 0, 0);
-        }
-    }
-    public void MovePlayerLeft()
-    {
-        if (player != null)
-        {
-            player.transform.position -= new Vector3(player.speed * Time.deltaTime, 0, 0);
-        }
+        return swipeDirection.x;
     }
 }
