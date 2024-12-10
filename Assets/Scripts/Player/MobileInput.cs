@@ -10,68 +10,63 @@ public class MobileInput : MonoBehaviour
     private float minSwipeDistance = 5f;
 
 
-    Vector2 swipeDirection;
+    float horizontalValue = 0;
 
-    private void Update()
+    public float HorizontalValue => horizontalValue;
+
+
+    private float screenWidth;  // Screen width
+    private float touchDuration;
+    private const float maxTouchDuration = 2f;  // Max time for full value (-1 or 1)
+
+
+    void Start()
     {
-        if (Input.touchCount == 1)
+        screenWidth = Screen.width;
+    }
+
+    void Update()
+    {
+
+        if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
+            Vector2 touchPosition = touch.position;
 
             if (touch.phase == TouchPhase.Began)
             {
-                touchStartPosition = touch.position;
+                touchDuration = 0;
             }
-            if (touch.phase == TouchPhase.Ended)
+            else if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
             {
-                touchEndPosition = touch.position;
-                DetectSwipeDirection();
-            }
+                // Increment touch duration
+                touchDuration += Time.deltaTime;
 
-        }
-    }
-    public void DetectSwipeDirection()
-    {
-        float swipeDistance = (touchEndPosition - touchStartPosition).magnitude;
-        if (swipeDistance >= minSwipeDistance)
-        {
-             swipeDirection = touchEndPosition - touchStartPosition;
-
-            // Determine swipe direction (up, down, left, right)
-            if (Mathf.Abs(swipeDirection.x) > Mathf.Abs(swipeDirection.y)) // Horizontal swipe
-            {
-                //if (swipeDirection.x > 0)
-                //{
-                //    // Swipe right
-                //    MovePlayerRight();
-
-                //}
-                //else
-                //{
-                //    MovePlayerLeft();
-                //}
-            }
-            else // Vertical swipe
-            {
-                if (swipeDirection.y > 0)
+                // Determine whether the touch is on the left or right side of the screen
+                if (touchPosition.x < screenWidth / 2)
                 {
-                    // Swipe up
-                    Debug.Log("Swipe Up");
+                    horizontalValue = Mathf.Clamp(-touchDuration / maxTouchDuration, -1, 0); // Left side
                 }
                 else
                 {
-                    // Swipe down
-                    Debug.Log("Swipe Down");
+                    horizontalValue = Mathf.Clamp(touchDuration / maxTouchDuration, 0, 1); // Right side
                 }
             }
-
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+            {
+                touchDuration = 0;
+                horizontalValue = 0; // Reset
+            }
         }
-        swipeDirection = Vector2.zero;
-    }
-
-
-    public float HorizontalInput()
-    {
-        return swipeDirection.x;
+        // Use horizontalAxis value (for debugging or gameplay mechanics)
+        Debug.Log("Horizontal Value: " + horizontalValue);
     }
 }
+
+
+
+//public float HorizontalInput()
+//{
+//    return swipeDirection.x;
+//}
+

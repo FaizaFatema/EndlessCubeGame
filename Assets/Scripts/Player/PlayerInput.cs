@@ -26,9 +26,9 @@ public class PlayerInput : MonoBehaviour
         {
             m_InputVector = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
         }
-        else if (mobileInput.HorizontalInput() != 0)
+        else if (mobileInput.HorizontalValue != 0)
         {
-            m_InputVector = new Vector3(mobileInput.HorizontalInput(), 0, 0);
+            m_InputVector = new Vector3(mobileInput.HorizontalValue, 0, 0);
         }
         else
         {
