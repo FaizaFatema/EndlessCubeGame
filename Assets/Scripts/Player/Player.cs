@@ -29,6 +29,11 @@ public class Player : MonoBehaviour
     public void Update()
     {
         Vector3 inputVector = playerInput.InputVector;
-        playerMovement.Move(inputVector);
+        bool isJumping = playerInput.isjumping;
+
+        playerMovement.Move(inputVector,isJumping);
+
+        
     }
+  
 }

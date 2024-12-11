@@ -11,6 +11,7 @@ public class PlayerInput : MonoBehaviour
     public MobileInput mobileInput;
     public PcInput pcInput;
 
+    public bool isjumping { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,15 @@ public class PlayerInput : MonoBehaviour
         {
             m_InputVector = Vector3.zero;
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isjumping = true;
+        }
+        else
+        {
+            isjumping = false;
+        }
+       
     }
 }

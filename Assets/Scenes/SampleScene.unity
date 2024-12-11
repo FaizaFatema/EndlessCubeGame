@@ -3781,6 +3781,9 @@ MonoBehaviour:
   horizontalSpeed: 5
   minX: -4.45
   maxX: 4.45
+  jumpForce: 8
+  gravityScale: 2
+  groundCheckDistance: 0.1
 --- !u!114 &2141243816
 MonoBehaviour:
   m_ObjectHideFlags: 0
