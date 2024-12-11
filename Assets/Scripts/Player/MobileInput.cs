@@ -8,11 +8,12 @@ public class MobileInput : MonoBehaviour
     private Vector2 touchStartPosition;
     private Vector2 touchEndPosition;
     private float minSwipeDistance = 5f;
-
+    private bool isJumping=false;
 
     float horizontalValue = 0;
 
     public float HorizontalValue => horizontalValue;
+    public bool IsJumping => isJumping;
 
 
     private float screenWidth;  // Screen width

@@ -10,19 +10,54 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float minX;
     [SerializeField] float maxX;
+    [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private float gravityScale = 2f;
+    [SerializeField] private float groundCheckDistance = 0.1f;
 
+    private bool isGrounded;
 
-    public void Move(Vector3 inputVector)
+    private Rigidbody rb;
+
+    private void Start()
     {
-        inputVector  = inputVector.normalized;
-        inputVector *= Time.deltaTime;
-        transform.position += new Vector3(horizontalSpeed * inputVector.x, horizontalSpeed * inputVector.y,
-            10*Time.deltaTime) ;
+        rb = GetComponent<Rigidbody>();
+    }
 
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x,minX,maxX),
+    public void Move(Vector3 inputVector, bool isJumping)
+    {
+        inputVector = inputVector.normalized;
+        inputVector *= Time.deltaTime;
+
+        transform.position += new Vector3(horizontalSpeed * inputVector.x, horizontalSpeed * inputVector.y,
+            10 * Time.deltaTime);
+
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX),
             transform.position.y,
             transform.position.z);
 
+        if (isJumping && isGrounded)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+        }
+        if (!isGrounded)
+        {
+            rb.AddForce(Vector3.down * gravityScale, ForceMode.Acceleration);
+        }
 
+    }
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.collider.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.collider.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
