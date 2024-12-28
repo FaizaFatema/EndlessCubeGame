@@ -51,7 +51,7 @@ public class GroundManager : MonoBehaviour
 
 
         // Get the size of the selected prefab
-        Debug.Log($" ground prefab size z is {prefabSize.z}");
+       // Debug.Log($" ground prefab size z is {prefabSize.z}");
         // Calculate the spawn position based on the last position and the size of the last spawned platform
 
 

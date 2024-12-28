@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+ 
     public static MainMenu Instance;
 
     public GameObject mainMenu;
@@ -14,8 +16,12 @@ public class MainMenu : MonoBehaviour
 
     public Transform startposition;
 
+    public SoundManager soundManager;
+
+   
     private void Awake()
     {
+        soundManager.PauseMusic();
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -34,13 +40,13 @@ public class MainMenu : MonoBehaviour
         IsmainMenu= false;
         mainMenu.SetActive(false);
         player.SetActive(false);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         player.transform.position = startposition.position;
         player.SetActive(true);
         player.GetComponent<Player>().enabled = true;
         Score.Instance.score = 0;
         MainMenu.Instance.mainMenu.SetActive(false);
         Time.timeScale = 1f;
+        soundManager.ResumeMusic();
        
     }
     public void QuitGame()

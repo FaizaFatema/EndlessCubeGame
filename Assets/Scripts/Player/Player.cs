@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
 
         playerMovement.Move(inputVector,isJumping);
 
-        
     }
   
 }

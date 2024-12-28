@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public SoundManager soundManager;
 
     [SerializeField]
     private float horizontalSpeed;
@@ -12,8 +13,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float maxX;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private float gravityScale = 2f;
-    [SerializeField] private float groundCheckDistance = 0.1f;
-
     private bool isGrounded;
 
     private Rigidbody rb;
@@ -21,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        soundManager.PlayBackgroundMusic();
     }
 
     public void Move(Vector3 inputVector, bool isJumping)
@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         if (isJumping && isGrounded)
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+            soundManager.PlayJumpSound();
         }
         if (!isGrounded)
         {

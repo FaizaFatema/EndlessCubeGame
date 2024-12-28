@@ -22,12 +22,20 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(Input.GetAxis("Horizontal") != 0 )
+        if (pcInput.IsJumping || mobileInput.IsJumping)
         {
-            m_InputVector = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+            isjumping = true;
         }
-        else if (mobileInput.HorizontalValue != 0)
+        else
+        {
+            isjumping = false;
+        }
+
+        if (pcInput.HorizontalValue != 0 && !isjumping)
+        {
+            m_InputVector = new Vector3(pcInput.HorizontalValue, 0, 0);
+        }
+        else if (mobileInput.HorizontalValue != 0 && !isjumping)
         {
             m_InputVector = new Vector3(mobileInput.HorizontalValue, 0, 0);
         }
@@ -36,14 +44,6 @@ public class PlayerInput : MonoBehaviour
             m_InputVector = Vector3.zero;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            isjumping = true;
-        }
-        else
-        {
-            isjumping = false;
-        }
        
     }
 }
